@@ -1,0 +1,51 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.12.5,<0.13" ]
+
+[project]
+name = "scaffold-python-cli"
+version = "0.2.0"
+description = "GitHub template for a Python/uv/Typer command-line tool"
+readme = "README.md"
+authors = [ { name = "Ryan Kes", email = "ryan@andthensome.nl" } ]
+requires-python = ">=3.13"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+  "typer==0.27.1",
+]
+scripts.scaffold-python-cli = "scaffold_python_cli:main"
+
+[dependency-groups]
+dev = [
+  "pyproject-fmt==2.28.1",
+  "pytest==9.1.1",
+  "pytest-cov==7.1",
+  "ruff==0.16.5",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+format.indent-style = "space"
+format.quote-style = "double"
+lint.select = [
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "I",   # isort
+  "N",   # pep8-naming
+  "SIM", # flake8-simplify
+  "UP",  # pyupgrade
+  "W",   # pycodestyle warnings
+]
+lint.ignore = [
+  "E501", # line too long (handled by the formatter)
+]
+
+[tool.pytest]
+ini_options.testpaths = [ "tests" ]
