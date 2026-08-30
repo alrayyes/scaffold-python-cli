@@ -1,6 +1,7 @@
 # scaffold-python-cli
 
 [![CI](https://github.com/alrayyes/scaffold-python-cli/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/alrayyes/scaffold-python-cli/actions/workflows/ci.yml)
+[![Codecov](https://codecov.io/gh/alrayyes/scaffold-python-cli/graph/badge.svg)](https://codecov.io/gh/alrayyes/scaffold-python-cli)
 [![release](https://img.shields.io/github/v/release/alrayyes/scaffold-python-cli?sort=semver)](https://github.com/alrayyes/scaffold-python-cli/releases/latest)
 [![licence](https://img.shields.io/badge/licence-unlicensed-lightgrey)](LICENSE)
 

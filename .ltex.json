@@ -5,6 +5,7 @@
       "Astral",
       "CliRunner",
       "Dependabot",
+      "Codecov",
       "Forgejo",
       "Gitea",
       "PyPI",
