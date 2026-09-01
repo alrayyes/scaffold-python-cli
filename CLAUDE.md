@@ -52,3 +52,12 @@ Full list and what each one does: [CONTRIBUTING.md](CONTRIBUTING.md).
   makes, not this template.
 - **Renovate can't reach this repo.** It's GitHub-primary; Dependabot
   (`.github/dependabot.yml`) is what raises dependency pull requests here.
+- **Packaging (PyInstaller/.deb/.rpm/AUR/Nix) is real, not a stub.**
+  `Dockerfile`'s `pyinstaller` stage, `nfpm.yaml`, `PKGBUILD` and
+  `flake.nix` all match the reference implementation proved out in
+  `alrayyes/movie-planner`, verified end to end (a real PyInstaller
+  binary, a real `.deb`/`.rpm` install in a non-slim Debian/Fedora
+  container, a real `makepkg` build/install, a real `nix build`/`nix
+run`) rather than eyeballed. A project stamped from this template
+  renames `scaffold-python-cli` throughout those files (and
+  `docs/INSTALL.md`) the same day it replaces `greet`.

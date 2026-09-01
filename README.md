@@ -45,6 +45,10 @@ from it ends up hosted on Forgejo instead, see
 
 ## Installation
 
+See [`docs/INSTALL.md`](docs/INSTALL.md) for every install method — the
+AUR, Nix, `.deb`/`.rpm` release assets, and installing from a checkout.
+For development, or to run from a checkout:
+
 ```sh
 git clone https://github.com/alrayyes/scaffold-python-cli.git
 cd scaffold-python-cli

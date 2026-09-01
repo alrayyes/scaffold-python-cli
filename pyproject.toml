@@ -23,6 +23,8 @@ scripts.scaffold-python-cli = "scaffold_python_cli:main"
 
 [dependency-groups]
 dev = [
+  "click-man==0.5.1",
+  "pyinstaller==6.22.2",
   "pyproject-fmt==2.28.1",
   "pytest==9.1.1",
   "pytest-cov==7.1",
