@@ -14,3 +14,7 @@ CHANGELOG.md
 # Vale's downloaded style packages.
 styles/Google/
 styles/proselint/
+
+# `openspec init`'s generated skill/command docs — somebody else's docs,
+# held to somebody else's rules.
+.claude/
