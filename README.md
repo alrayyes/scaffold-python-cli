@@ -17,10 +17,6 @@ so the whole chain — code, tests, hooks, CI — has something real to run
 against. Replace it with your first real command and delete this
 paragraph.
 
-The tooling this template wires in is GitHub-primary. If a project stamped
-from it ends up hosted on Forgejo instead, see
-[FORGEJO.md](FORGEJO.md) for what to swap in.
-
 ## Requirements
 
 - **Python 3.13 or newer.**
