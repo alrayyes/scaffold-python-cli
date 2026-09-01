@@ -83,7 +83,14 @@ jobs:
   # scaffold-python-cli package, not by the key itself.
   aur-package:
     needs: release-please
-    if: needs.release-please.outputs.release_created == 'true'
+    # Disabled 2026-09-01: this is a template repo, not a real project
+    # anyone should `pacman -S` — arming release-PR auto-merge let its
+    # first-ever release cut on its own and this job push a real
+    # "scaffold-python-cli" package to the live AUR, which is not
+    # something a template should ever publish. `false &&` rather than
+    # deleting the job: the steps below are the reference implementation
+    # a project actually stamped from this scaffold copies verbatim.
+    if: false && needs.release-please.outputs.release_created == 'true'
     runs-on: ubuntu-24.04
     container: archlinux:latest
     steps:
