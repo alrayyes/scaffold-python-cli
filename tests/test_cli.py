@@ -6,7 +6,13 @@ import pytest
 from typer.testing import CliRunner
 
 from scaffold_python_cli.cli import app
-from scaffold_python_cli.config import VERBOSE_ENV_VAR, config_file_path, load_file_config
+from scaffold_python_cli.config import (
+    API_TOKEN_COMMAND_ENV_VAR,
+    API_TOKEN_ENV_VAR,
+    VERBOSE_ENV_VAR,
+    config_file_path,
+    load_file_config,
+)
 from scaffold_python_cli.first_run import maybe_offer_init
 
 runner = CliRunner()
@@ -16,6 +22,8 @@ runner = CliRunner()
 def isolated_config_home(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
     monkeypatch.delenv(VERBOSE_ENV_VAR, raising=False)
+    monkeypatch.delenv(API_TOKEN_ENV_VAR, raising=False)
+    monkeypatch.delenv(API_TOKEN_COMMAND_ENV_VAR, raising=False)
     return tmp_path
 
 
@@ -180,3 +188,79 @@ def test_maybe_offer_init_does_nothing_on_a_no_answer() -> None:
     )
 
     assert not config_file_path().exists()
+
+
+def test_init_never_writes_a_literal_secret() -> None:
+    result = runner.invoke(app, ["init"])
+
+    assert result.exit_code == 0
+    written = load_file_config()
+    assert written.api_token == ""
+    assert written.api_token_command == ""
+    # the _command sibling is documented as a commented example, not left
+    # out entirely -- someone hand-authoring a real one has something to
+    # copy.
+    assert "hush-hush get" in config_file_path().read_text()
+
+
+def test_greet_reports_no_authentication_by_default() -> None:
+    result = runner.invoke(app, ["--verbose", "greet"])
+
+    assert "(authenticated)" not in result.stdout
+
+
+def test_greet_reports_authenticated_with_a_literal_api_token_flag() -> None:
+    result = runner.invoke(app, ["--verbose", "--api-token", "shh", "greet"])
+
+    assert "(authenticated)" in result.stdout
+
+
+def test_api_token_env_var_is_picked_up(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv(API_TOKEN_ENV_VAR, "env-token")
+
+    result = runner.invoke(app, ["--verbose", "greet"])
+
+    assert "(authenticated)" in result.stdout
+
+
+def test_api_token_config_file_is_picked_up(isolated_config_home: Path) -> None:
+    path = config_file_path()
+    path.parent.mkdir(parents=True)
+    path.write_text('api_token = "from-file"\n')
+
+    result = runner.invoke(app, ["--verbose", "greet"])
+
+    assert "(authenticated)" in result.stdout
+
+
+def test_api_token_command_is_run_and_its_output_used() -> None:
+    result = runner.invoke(app, ["--verbose", "--api-token-command", "echo from-command", "greet"])
+
+    assert result.exit_code == 0
+    assert "(authenticated)" in result.stdout
+
+
+def test_api_token_command_wins_over_a_literal_when_both_are_set(
+    isolated_config_home: Path,
+) -> None:
+    path = config_file_path()
+    path.parent.mkdir(parents=True)
+    path.write_text('api_token = "literal-value"\napi_token_command = "echo from-command"\n')
+
+    cfg = load_file_config()
+
+    assert cfg.resolved_api_token() == "from-command"
+
+
+def test_api_token_command_trims_exactly_one_trailing_newline() -> None:
+    cfg = load_file_config()  # empty config, exercise resolve_secret directly via the field
+    cfg.api_token_command = "printf 'value\\n\\n'"
+
+    assert cfg.resolved_api_token() == "value\n"
+
+
+def test_a_failing_api_token_command_errors_the_run_rather_than_falling_back() -> None:
+    result = runner.invoke(app, ["--api-token-command", "exit 1", "greet"])
+
+    assert result.exit_code != 0
+    assert "exited 1" in result.output

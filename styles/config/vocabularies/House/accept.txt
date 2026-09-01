@@ -39,3 +39,7 @@ whoever's
 CI
 YAML
 JSON
+restic
+restic's
+msmtp
+msmtp's
