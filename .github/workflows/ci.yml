@@ -79,6 +79,102 @@ jobs:
         # a project stamped from it adds that the day it needs one.
         run: uv build
 
+  # No release-job counterpart, unlike package-linux — a flake has
+  # nothing to publish. `nix run github:alrayyes/scaffold-python-cli`
+  # (or `nix profile install`) resolves the flake straight from
+  # whatever commit is asked for; the commit itself is the
+  # distributable artifact, so this only ever needs to prove the flake
+  # still builds.
+  nix:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: cachix/install-nix-action@2126ae7fc54c9df00dd18f7f18754393182c73cd # v31.9.1
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - name: nix flake check
+        run: nix flake check --print-build-logs
+      - name: nix build
+        run: nix build --print-build-logs
+      - name: nix run
+        run: nix run . -- --help
+
+  # Dry run of the same build package-linux.yml's release-job call does,
+  # against a fixed dev version — proves the .deb/.rpm still build and
+  # actually install before a change to the Dockerfile's pyinstaller
+  # stage, nfpm.yaml, or either script only gets exercised for real
+  # against a tagged release.
+  package-linux:
+    uses: ./.github/workflows/package-linux.yml
+    with:
+      version: "0.0.0-dev"
+
+  # Dry run of the AUR PKGBUILD, against a local source tarball built
+  # from the current checkout rather than a real GitHub release — so
+  # a PKGBUILD change gets exercised on every push/PR, not only for
+  # real against a tagged release. makepkg refuses to run as root, so
+  # this creates a build user the same way the release job's
+  # container does.
+  aur:
+    runs-on: ubuntu-24.04
+    container: archlinux:latest
+    steps:
+      # archlinux:latest ships no git at all. Confirmed live: with git
+      # missing, actions/checkout falls back to downloading a tarball
+      # via the GitHub REST API instead of a real clone — the checkout
+      # succeeds, but the result has no .git directory, so `git
+      # archive HEAD` two steps later fails with "not a git
+      # repository". git has to be present before checkout runs, not
+      # just before the steps that call it directly.
+      - name: Bootstrap git for checkout
+        run: pacman -Sy --noconfirm --needed git
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install build tooling
+        run: |
+          pacman -Sy --noconfirm --needed \
+            base-devel sudo man-db \
+            python-build python-installer python-wheel python-uv-build \
+            python-platformdirs python-tomli-w python-typer
+          # The archlinux image's own pacman.conf excludes man pages
+          # from every install by default (an image-size optimization,
+          # not real Arch behavior) — confirmed live: a package
+          # correctly containing a man page still installed as if it
+          # didn't, silently. Removed so the man-page check below is
+          # actually meaningful.
+          sed -i '/^NoExtract.*man/d' /etc/pacman.conf
+          # actions/checkout's own dubious-ownership fix writes into a
+          # temporary $HOME that only exists for that step — a
+          # `container:` job running as root never sees it again in
+          # later steps' real $HOME, so any git command from here on
+          # (git archive below included) hits "detected dubious
+          # ownership" without this.
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          useradd -m builder
+          echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+      - name: Build a local source tarball standing in for a GitHub release
+        run: |
+          mkdir -p /tmp/src
+          git archive --prefix=scaffold-python-cli-scaffold-python-cli-v0.0.0/ \
+            -o /tmp/src/scaffold-python-cli-0.0.0.tar.gz HEAD
+          chmod -R a+rwX /tmp/src "$GITHUB_WORKSPACE"
+      - name: Prepare a dev PKGBUILD pointing at that tarball
+        run: |
+          sed \
+            -e "s/^pkgver=.*/pkgver=0.0.0/" \
+            -e "s#^source=.*#source=(\"file:///tmp/src/scaffold-python-cli-0.0.0.tar.gz\")#" \
+            -e "s/^sha256sums=.*/sha256sums=('SKIP')/" \
+            PKGBUILD > /tmp/src/PKGBUILD
+      - name: Install AUR-only build dependencies
+        run: su builder -c "bash '$GITHUB_WORKSPACE/scripts/install-aur-builddeps.sh'"
+      - name: makepkg
+        run: su builder -c "cd /tmp/src && makepkg -s --noconfirm --nocheck"
+      - name: Install and verify
+        run: |
+          pacman -U --noconfirm /tmp/src/scaffold-python-cli-0.0.0-1-any.pkg.tar.zst
+          scaffold-python-cli --help
+          man -w scaffold-python-cli
+
   # Layout and structure. Style and mechanics are prose.yml — see its header
   # comment for why they're split out.
   prose:
