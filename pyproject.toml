@@ -4,7 +4,7 @@ requires = [ "uv-build>=0.12.5,<0.13" ]
 
 [project]
 name = "scaffold-python-cli"
-version = "0.2.0"
+version = "0.3.0"
 description = "GitHub template for a Python/uv/Typer command-line tool"
 readme = "README.md"
 authors = [ { name = "Ryan Kes", email = "ryan@andthensome.nl" } ]
