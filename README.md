@@ -41,8 +41,7 @@ from it ends up hosted on Forgejo instead, see
   tools resolve and stay pinned.
 - **[Vale](https://vale.sh)**, pinned in
   [CONTRIBUTING.md](CONTRIBUTING.md#getting-set-up).
-- No external services. `greet` prints to stdout and touches nothing
-  else.
+- No external services. Configuration is optional — see Usage below.
 
 ## Installation
 
@@ -59,6 +58,22 @@ uv run scaffold-python-cli greet --name World
 ```
 
 Prints `Hello, World!`.
+
+A run with no config file yet offers to create one — answer no, or run
+non-interactively (CI, a script, a pipe), and it just runs on defaults.
+`init` writes the starter file directly:
+
+```sh
+uv run scaffold-python-cli init
+```
+
+Every setting takes a flag, an environment variable
+(`SCAFFOLD_PYTHON_CLI_<SETTING>`), or a line in the config file
+(`$XDG_CONFIG_HOME/scaffold-python-cli/config.toml`, usually
+`~/.config/scaffold-python-cli/config.toml`) — in that order of
+precedence. `--verbose` / `SCAFFOLD_PYTHON_CLI_VERBOSE` / `verbose = true`
+all do the same thing; `--no-verbose` overrides either of the other two
+back off.
 
 ## Contributing
 

@@ -15,6 +15,8 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
+  "platformdirs==4.11.5",
+  "tomli-w==1.2",
   "typer==0.27.1",
 ]
 scripts.scaffold-python-cli = "scaffold_python_cli:main"
