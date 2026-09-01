@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.0...scaffold-python-cli-v0.3.1) (2026-09-01)
+
+
+### Bug Fixes
+
+* **ci:** stop publishing this template's releases to the real AUR ([#15](https://github.com/alrayyes/scaffold-python-cli/issues/15)) ([fa1bc1e](https://github.com/alrayyes/scaffold-python-cli/commit/fa1bc1e8cee23d3e5a154890ee800a62313869c5))
+
 ## [0.3.0](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.2.0...scaffold-python-cli-v0.3.0) (2026-09-01)
 
 
