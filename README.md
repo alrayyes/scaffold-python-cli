@@ -75,6 +75,23 @@ precedence. `--verbose` / `SCAFFOLD_PYTHON_CLI_VERBOSE` / `verbose = true`
 all do the same thing; `--no-verbose` overrides either of the other two
 back off.
 
+`api_token` is the example credential field, and it takes a second form
+too: `api_token_command` (`--api-token-command` /
+`SCAFFOLD_PYTHON_CLI_API_TOKEN_COMMAND`) runs a command through the shell
+and uses its trimmed stdout as the token instead — the same shape as
+restic's `--password-command`, msmtp's `passwordeval`, Borg's
+`BORG_PASSCOMMAND`. If both `api_token` and `api_token_command` are set,
+the command wins, and a command that exits non-zero fails the run rather
+than silently resolving to an empty token. `init` never writes a literal
+value for `api_token` — the config file it generates shows the `_command`
+form commented out as an example, pointing at
+`hush-hush get <object-key>` (swap in whatever this account's own secrets
+tooling is):
+
+```toml
+# api_token_command = "hush-hush get scaffold-python-cli-api-token"
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the toolchain, the hooks, and
