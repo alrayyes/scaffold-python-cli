@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.1...scaffold-python-cli-v0.3.2) (2026-09-02)
+
+
+### Documentation
+
+* **openspec:** record required-status-checks fix ([#18](https://github.com/alrayyes/scaffold-python-cli/issues/18)) ([f5b3f5c](https://github.com/alrayyes/scaffold-python-cli/commit/f5b3f5cff636db6e597074d67a7d47806a339ea5))
+
 ## [0.3.1](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.0...scaffold-python-cli-v0.3.1) (2026-09-01)
 
 
