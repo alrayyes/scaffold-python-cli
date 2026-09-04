@@ -17,6 +17,15 @@ permissions:
   pull-requests: read
   statuses: write
 
+# A second push to the same PR makes the first run pointless. Grouped by PR
+# number rather than github.ref: pull_request_target sets github.ref to the
+# base branch (main), the same for every PR, so grouping on it would cancel
+# one PR's run because a different PR pushed — this keeps each PR's own runs
+# independent of every other PR's.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-24.04
