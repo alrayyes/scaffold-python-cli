@@ -17,6 +17,11 @@ permissions:
   contents: write
   pull-requests: write
 
+# A second push to the same Dependabot PR makes the first run pointless.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   auto-merge:
     if: github.actor == 'dependabot[bot]'
