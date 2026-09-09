@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.2...scaffold-python-cli-v0.3.3) (2026-09-09)
+
+
+### Bug Fixes
+
+* **ci:** don't fail Dependabot PRs on a tokenless Codecov upload ([#29](https://github.com/alrayyes/scaffold-python-cli/issues/29)) ([e062006](https://github.com/alrayyes/scaffold-python-cli/commit/e0620068771d1c48fee6b0693cea1ffdc93e4573))
+
 ## [0.3.2](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.1...scaffold-python-cli-v0.3.2) (2026-09-02)
 
 
