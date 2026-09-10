@@ -51,8 +51,11 @@ jobs:
           version: "0.12.7"
       - run: uv sync --frozen
       - name: pytest
+        # --junitxml is pytest's own built-in, no new dependency: Codecov's
+        # Test Analytics reads it for failure/flake history alongside the
+        # coverage percentage.
         run: |
-          uv run pytest --cov=scaffold_python_cli --cov-report=term-missing --cov-report=xml | tee coverage.txt
+          uv run pytest --cov=scaffold_python_cli --cov-report=term-missing --cov-report=xml --junitxml=junit.xml | tee coverage.txt
           {
             echo '### Coverage'
             echo
@@ -61,6 +64,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload coverage to Codecov
+        if: ${{ !cancelled() }}
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -71,6 +75,17 @@ jobs:
           # protected"). That's an upload hiccup on an unprivileged run, not a
           # real test regression - true here would fail every Dependabot PR's
           # CI on that basis alone (confirmed live on #26/#27/#28).
+          fail_ci_if_error: false
+      # Run even when tests fail - a red PR is exactly the case Test
+      # Analytics exists to explain, and a job that stops at the first
+      # failing test never reaches an upload step gated behind success.
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report-type: test_results
+          files: junit.xml
           fail_ci_if_error: false
 
   build:
