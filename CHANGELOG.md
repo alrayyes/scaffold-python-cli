@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.0...scaffold-python-cli-v0.4.1) (2026-09-10)
+
+
+### Bug Fixes
+
+* **ci:** report_type is underscore-separated, not report-type ([#36](https://github.com/alrayyes/scaffold-python-cli/issues/36)) ([95c84d0](https://github.com/alrayyes/scaffold-python-cli/commit/95c84d0559f971970257376a5c415ae45d7793a9))
+
 ## [0.4.0](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.4...scaffold-python-cli-v0.4.0) (2026-09-10)
 
 
