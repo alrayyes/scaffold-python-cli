@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.4...scaffold-python-cli-v0.4.0) (2026-09-10)
+
+
+### Features
+
+* **ci:** add Codecov Test Analytics ([#34](https://github.com/alrayyes/scaffold-python-cli/issues/34)) ([5de74f0](https://github.com/alrayyes/scaffold-python-cli/commit/5de74f0e756c3e483bfe01034f6f5d7ed8e0a450)), closes [#32](https://github.com/alrayyes/scaffold-python-cli/issues/32)
+
 ## [0.3.4](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.3.3...scaffold-python-cli-v0.3.4) (2026-09-09)
 
 
