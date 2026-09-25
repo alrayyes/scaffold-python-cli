@@ -20,12 +20,16 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       # Conventional Commits, because commitlint checks these messages and
-      # the version number is computed from them. uv ships in the built
-      # package, so a bump here is a change to what ships whether or not
-      # it's security-relevant, and fix: cuts the patch release the same way
-      # any other fix does. github-actions below stays ci: — it changes the
+      # the version number is computed from them. A `[project.dependencies]`
+      # bump ships in the built package, so it's a change to what ships
+      # whether or not it's security-relevant, and fix: cuts the patch
+      # release the same way any other fix does. A `[dependency-groups.dev]`
+      # bump (click-man, pyinstaller, pyproject-fmt, pytest, pytest-cov,
+      # ruff) never ships in the package itself, so it stays chore: and
+      # releases nothing. github-actions below stays ci: — it changes the
       # pipeline, not the artifact.
       prefix: fix
+      prefix-development: chore
       include: scope
     groups:
       python-dependencies:
