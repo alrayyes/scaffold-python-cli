@@ -6,6 +6,7 @@
       "CliRunner",
       "Dependabot",
       "Codecov",
+      "Cobertura",
       "Forgejo",
       "Gitea",
       "PyInstaller",

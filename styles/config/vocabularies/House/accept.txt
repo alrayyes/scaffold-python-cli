@@ -43,3 +43,5 @@ restic
 restic's
 msmtp
 msmtp's
+Cobertura
+JUnit
