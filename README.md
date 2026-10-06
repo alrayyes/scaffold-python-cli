@@ -92,6 +92,21 @@ tooling is):
 # api_token_command = "hush-hush get scaffold-python-cli-api-token"
 ```
 
+## Reports
+
+Every push to `main` publishes the test and coverage reports to GitHub Pages:
+
+- Coverage: <https://apis.ryankes.eu/scaffold-python-cli/reports/coverage/>,
+  with the Cobertura file at `.../reports/coverage/coverage.xml`.
+- Test results: `.../reports/tests/junit.xml` (JUnit XML).
+
+A repo generated from this template publishes under its own name, with no edit
+needed: turn on Pages (source: GitHub Actions) and the next push to `main`
+deploys. Pull requests assemble the reports but don't deploy them. A user-site
+repo (`<owner>.github.io`) is served at `/reports/` with no repo prefix; the
+workflow follows the deployed `page_url`, so it needs no change either.
+There's no Lighthouse report, since a command-line tool has no web page to audit.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the toolchain, the hooks, and
