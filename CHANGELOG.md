@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.2](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.1...scaffold-python-cli-v0.4.2) (2026-10-06)
+
+
+### Bug Fixes
+
+* **deps:** bump platformdirs in the python-dependencies group ([#47](https://github.com/alrayyes/scaffold-python-cli/issues/47)) ([934c231](https://github.com/alrayyes/scaffold-python-cli/commit/934c23119be84fd16b22a8e9f3f7b25e3531b5e5))
+* **deps:** bump the python-dependencies group across 1 directory with 2 updates ([#52](https://github.com/alrayyes/scaffold-python-cli/issues/52)) ([a485f8c](https://github.com/alrayyes/scaffold-python-cli/commit/a485f8c68ec06f030e626bccd0f7eff3c83a414b))
+* **deps:** bump the python-dependencies group with 2 updates ([#54](https://github.com/alrayyes/scaffold-python-cli/issues/54)) ([bdddf9c](https://github.com/alrayyes/scaffold-python-cli/commit/bdddf9c89d195f73e5b53f7567a628a3ae0b55da))
+* **deps:** bump the python-dependencies group with 3 updates ([#40](https://github.com/alrayyes/scaffold-python-cli/issues/40)) ([8cfc0f9](https://github.com/alrayyes/scaffold-python-cli/commit/8cfc0f9db387e190778f17aa390b353e3acc39ad))
+* **deps:** bump the python-dependencies group with 3 updates ([#43](https://github.com/alrayyes/scaffold-python-cli/issues/43)) ([7ebdf4f](https://github.com/alrayyes/scaffold-python-cli/commit/7ebdf4f225e35743c994147b4adfc12cb1f6a378))
+
 ## [0.4.1](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.0...scaffold-python-cli-v0.4.1) (2026-09-10)
 
 
