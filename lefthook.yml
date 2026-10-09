@@ -21,14 +21,14 @@ pre-commit:
       run: uv run ruff check --fix {staged_files}
       stage_fixed: true
 
-    # Unlike ruff, pyproject-fmt exits non-zero the moment it rewrites the
-    # file, even outside --check. `|| true` swallows that so the job reads
-    # as passed and stage_fixed restages the write, instead of lefthook
-    # treating the fix as a failure and skipping the restage.
+    # pyproject-fmt exits 1 when it rewrites the file and also when it can't
+    # parse it, so there is no way to tell "fixed it" from "broke" and let
+    # stage_fixed restage the first. The old `|| true` hid both. Check mode
+    # fails loudly with the diff instead; apply it with
+    # `uv run pyproject-fmt pyproject.toml`, then `git add` and commit again.
     - name: pyproject-fmt
       glob: "pyproject.toml"
-      run: uv run pyproject-fmt {staged_files} || true
-      stage_fixed: true
+      run: uv run pyproject-fmt --check {staged_files}
 
     # Prettier decides the layout, markdownlint then judges what Prettier
     # produced. The other order has markdownlint fixing something Prettier is
@@ -40,7 +40,9 @@ pre-commit:
 
     - name: markdownlint
       glob: "*.md"
-      run: bunx markdownlint-cli2 {staged_files}
+      # --no-globs: the `globs` in .markdownlint-cli2.yaml are added to any
+      # file list, so without it this lints the whole tree, not the commit.
+      run: bunx markdownlint-cli2 --no-globs {staged_files}
 
     # Fast enough for a commit. LTeX is not — around ten seconds a file — so
     # mechanics run at push instead, where the wait is paid once rather than
