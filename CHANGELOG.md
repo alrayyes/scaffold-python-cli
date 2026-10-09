@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.2...scaffold-python-cli-v0.4.3) (2026-10-09)
+
+
+### Bug Fixes
+
+* **hooks:** check pyproject-fmt in pre-commit without || true ([#60](https://github.com/alrayyes/scaffold-python-cli/issues/60)) ([478b38d](https://github.com/alrayyes/scaffold-python-cli/commit/478b38d856533e41db35d52ceeb548101382d457))
+
 ## [0.4.2](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.1...scaffold-python-cli-v0.4.2) (2026-10-06)
 
 
