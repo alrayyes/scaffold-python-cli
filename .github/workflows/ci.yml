@@ -120,6 +120,31 @@ jobs:
         run: |
           mkdir -p site/reports/tests site/reports/coverage
           cp raw/junit.xml site/reports/tests/junit.xml
+          # A directory URL needs an index.html to answer 200; JUnit XML has
+          # no HTML view of its own, so render one from the file.
+          python3 - <<'PY'
+          import html
+          import xml.etree.ElementTree as ET
+
+          root = ET.parse("site/reports/tests/junit.xml").getroot()
+          rows = []
+          for case in root.iter("testcase"):
+              if case.find("failure") is not None or case.find("error") is not None:
+                  status = "failed"
+              elif case.find("skipped") is not None:
+                  status = "skipped"
+              else:
+                  status = "passed"
+              name = html.escape(f"{case.get('classname', '')}::{case.get('name', '')}")
+              rows.append(f"<tr><td>{status}</td><td>{name}</td></tr>")
+          page = (
+              '<!doctype html><meta charset="utf-8"><title>Test results</title>'
+              "<h1>Test results</h1>"
+              f"<p>{len(rows)} tests. Raw file: <a href=\"junit.xml\">junit.xml</a>.</p>"
+              "<table><tr><th>Status</th><th>Test</th></tr>" + "".join(rows) + "</table>"
+          )
+          open("site/reports/tests/index.html", "w").write(page)
+          PY
           cp -r raw/htmlcov/. site/reports/coverage/
           cp raw/coverage.xml site/reports/coverage/coverage.xml
           cat > site/reports/index.html <<HTML
@@ -130,11 +155,12 @@ jobs:
           <p>Commit ${SHA}, built $(date -u +%Y-%m-%d).</p>
           <ul>
             <li><a href="coverage/">Coverage</a> (<a href="coverage/coverage.xml">coverage.xml</a>)</li>
-            <li><a href="tests/junit.xml">Test results</a> (JUnit XML)</li>
+            <li><a href="tests/">Test results</a> (<a href="tests/junit.xml">junit.xml</a>)</li>
           </ul>
           HTML
           grep -q '<coverage ' site/reports/coverage/coverage.xml
           grep -q '<testsuite' site/reports/tests/junit.xml
+          grep -q '<table>' site/reports/tests/index.html
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         if: github.event_name == 'push'
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
@@ -173,6 +199,9 @@ jobs:
           curl --fail --silent --show-error --location --retry 6 --retry-delay 10 \
             --retry-all-errors --output coverage.xml "${PAGE_URL%/}/reports/coverage/coverage.xml"
           grep -q '<coverage ' coverage.xml
+          curl --fail --silent --show-error --location --retry 6 --retry-delay 10 \
+            --retry-all-errors --output tests.html "${PAGE_URL%/}/reports/tests/"
+          grep -q '<table>' tests.html
 
   build:
     runs-on: ubuntu-24.04

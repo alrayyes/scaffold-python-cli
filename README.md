@@ -98,7 +98,8 @@ Every push to `main` publishes the test and coverage reports to GitHub Pages:
 
 - Coverage: <https://apis.ryankes.eu/scaffold-python-cli/reports/coverage/>,
   with the Cobertura file at `.../reports/coverage/coverage.xml`.
-- Test results: `.../reports/tests/junit.xml` (JUnit XML).
+- Test results: <https://apis.ryankes.eu/scaffold-python-cli/reports/tests/>,
+  with the JUnit XML at `.../reports/tests/junit.xml`.
 
 A repo generated from this template publishes under its own name, with no edit
 needed: turn on Pages (source: GitHub Actions) and the next push to `main`
