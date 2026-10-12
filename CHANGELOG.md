@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.4](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.3...scaffold-python-cli-v0.4.4) (2026-10-12)
+
+
+### Bug Fixes
+
+* **build:** allow uv-build 0.13 in the build requirement ([bc36c78](https://github.com/alrayyes/scaffold-python-cli/commit/bc36c7824bd1f0647dda330f9c53a97a4f693bdb))
+* **build:** allow uv-build 0.13 in the build requirement ([f305329](https://github.com/alrayyes/scaffold-python-cli/commit/f30532988cfa6ae0f7f5e8d47fb75d31156e5cf9)), closes [#65](https://github.com/alrayyes/scaffold-python-cli/issues/65)
+
 ## [0.4.3](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.2...scaffold-python-cli-v0.4.3) (2026-10-09)
 
 
