@@ -16,9 +16,9 @@ classifiers = [
   "Programming Language :: Python :: 3.15",
 ]
 dependencies = [
-  "platformdirs==4.12.2",
+  "platformdirs==4.12.4",
   "tomli-w==1.2",
-  "typer==0.27.2",
+  "typer==0.27.3",
 ]
 scripts.scaffold-python-cli = "scaffold_python_cli:main"
 
@@ -26,7 +26,7 @@ scripts.scaffold-python-cli = "scaffold_python_cli:main"
 dev = [
   "click-man==0.5.1",
   "pyinstaller==6.22.3",
-  "pyproject-fmt==2.29.4",
+  "pyproject-fmt==2.30.1",
   "pytest==9.1.1",
   "pytest-cov==7.1",
   "ruff==0.16.10",
