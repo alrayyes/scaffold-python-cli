@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.5](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.4...scaffold-python-cli-v0.4.5) (2026-10-15)
+
+
+### Bug Fixes
+
+* **ci:** run release-auto-merge when the autorelease label is added ([#69](https://github.com/alrayyes/scaffold-python-cli/issues/69)) ([def3e17](https://github.com/alrayyes/scaffold-python-cli/commit/def3e17dd0bbd24438b27405905836ed625158ad)), closes [#68](https://github.com/alrayyes/scaffold-python-cli/issues/68)
+* **deps:** bump the python-dependencies group across 1 directory with 3 updates ([#62](https://github.com/alrayyes/scaffold-python-cli/issues/62)) ([13cf7dd](https://github.com/alrayyes/scaffold-python-cli/commit/13cf7dd8926a4d34077f1c870821979ecf253cc6))
+
 ## [0.4.4](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.3...scaffold-python-cli-v0.4.4) (2026-10-12)
 
 
