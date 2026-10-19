@@ -17,7 +17,7 @@ classifiers = [
 ]
 dependencies = [
   "platformdirs==4.12.4",
-  "tomli-w==1.2",
+  "tomli-w==1.2.0",
   "typer==0.27.3",
 ]
 scripts.scaffold-python-cli = "scaffold_python_cli:main"
@@ -51,6 +51,9 @@ lint.select = [
 lint.ignore = [
   "E501", # line too long (handled by the formatter)
 ]
+
+[tool.pyproject-fmt]
+keep_full_version = true
 
 [tool.pytest]
 ini_options.testpaths = [ "tests" ]

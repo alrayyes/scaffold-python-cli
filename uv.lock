@@ -373,7 +373,7 @@ wheels = [
 
 [[package]]
 name = "scaffold-python-cli"
-version = "0.4.4"
+version = "0.4.5"
 source = { editable = "." }
 dependencies = [
     { name = "platformdirs" },
@@ -394,7 +394,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "platformdirs", specifier = "==4.12.4" },
-    { name = "tomli-w", specifier = "==1.2" },
+    { name = "tomli-w", specifier = "==1.2.0" },
     { name = "typer", specifier = "==0.27.3" },
 ]
 
