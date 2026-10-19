@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.6](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.5...scaffold-python-cli-v0.4.6) (2026-10-19)
+
+
+### Bug Fixes
+
+* **lint:** keep full versions in pyproject-fmt so Dependabot pins pass ([#75](https://github.com/alrayyes/scaffold-python-cli/issues/75)) ([6b64120](https://github.com/alrayyes/scaffold-python-cli/commit/6b64120544f23be8b591a09789b022d785aa5726)), closes [#74](https://github.com/alrayyes/scaffold-python-cli/issues/74)
+
 ## [0.4.5](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.4...scaffold-python-cli-v0.4.5) (2026-10-15)
 
 
