@@ -19,6 +19,7 @@
       "changelog",
       "commitlint",
       "devDependencies",
+      "gitleaks",
       "isort",
       "lefthook",
       "ltex-cli-plus",
