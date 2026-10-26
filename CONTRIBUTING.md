@@ -28,12 +28,12 @@ This file is for whoever changes this template. The
   CI runs, or the hook passes and the pipeline fails for a reason that
   isn't obvious from the failure.
 
+  `ltex-cli-plus` needs nothing installed: the hook fetches and caches it
+  on first use.
+
 - **[gitleaks](https://github.com/gitleaks/gitleaks) v8.30.1** on your `PATH`,
   for the secret scan the commit and push hooks run. Your package manager's
   build is fine; CI runs the same version as a pinned container image.
-
-  `ltex-cli-plus` needs nothing installed: the hook fetches and caches it
-  on first use.
 
 Two commands install the linters and the git hooks:
 
