@@ -44,6 +44,11 @@ pre-commit:
       # file list, so without it this lints the whole tree, not the commit.
       run: bunx markdownlint-cli2 --no-globs {staged_files}
 
+    # The index only. The pre-push hook and CI scan the history, which is a
+    # second or two on a repo this size.
+    - name: gitleaks
+      run: gitleaks git --staged --redact --no-banner
+
     # Fast enough for a commit. LTeX is not — around ten seconds a file — so
     # mechanics run at push instead, where the wait is paid once rather than
     # per commit.
@@ -74,6 +79,11 @@ pre-push:
 
     - name: ruff-check
       run: uv run ruff check
+
+    # The whole history: cheap here, so the hook skips the unpushed-range
+    # script and matches CI.
+    - name: gitleaks
+      run: gitleaks git --redact --no-banner
 
     - name: ruff-format-check
       run: uv run ruff format --check

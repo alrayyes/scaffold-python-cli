@@ -5,6 +5,7 @@ Codecov
 GitHub
 [Rr]uff
 [Tt]yper
+gitleaks
 lefthook
 markdownlint
 commitlint

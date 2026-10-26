@@ -37,6 +37,8 @@ paragraph.
   tools resolve and stay pinned.
 - **[Vale](https://vale.sh)**, pinned in
   [CONTRIBUTING.md](CONTRIBUTING.md#getting-set-up).
+- **[gitleaks](https://github.com/gitleaks/gitleaks)**, pinned in
+  [CONTRIBUTING.md](CONTRIBUTING.md#getting-set-up).
 - No external services. Configuration is optional — see Usage below.
 
 ## Installation
