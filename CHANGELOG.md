@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.9](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.8...scaffold-python-cli-v0.4.9) (2026-10-28)
+
+
+### Bug Fixes
+
+* **ci:** stop cancelling the labeled release-auto-merge run ([#89](https://github.com/alrayyes/scaffold-python-cli/issues/89)) ([a3e23c6](https://github.com/alrayyes/scaffold-python-cli/commit/a3e23c68cb82a6794b6c5cef0bcf4588196e8378))
+
 ## [0.4.8](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.7...scaffold-python-cli-v0.4.8) (2026-10-26)
 
 
