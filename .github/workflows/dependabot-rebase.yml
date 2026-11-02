@@ -22,11 +22,15 @@ jobs:
     steps:
       - name: Ask Dependabot to rebase pull requests that fell behind
         run: |
-          # GitHub computes mergeStateStatus lazily after a push; give it a beat.
-          sleep 20
-          gh pr list --repo "$GITHUB_REPOSITORY" --author "app/dependabot" \
-            --json number,mergeStateStatus \
-            --jq '.[] | select(.mergeStateStatus == "BEHIND") | .number' |
+          # GitHub computes mergeStateStatus lazily after a push, so UNKNOWN
+          # is normal at first. Poll until none is left, up to about a minute.
+          for _ in 1 2 3 4 5 6; do
+            states=$(gh pr list --repo "$GITHUB_REPOSITORY" --author "app/dependabot" \
+              --json number,mergeStateStatus)
+            echo "$states" | jq -e 'any(.[]; .mergeStateStatus == "UNKNOWN")' >/dev/null || break
+            sleep 10
+          done
+          echo "$states" | jq -r '.[] | select(.mergeStateStatus == "BEHIND") | .number' |
             while read -r pr; do
               gh pr comment "$pr" --repo "$GITHUB_REPOSITORY" --body "@dependabot rebase"
             done
