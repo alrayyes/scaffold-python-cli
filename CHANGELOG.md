@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.11](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.10...scaffold-python-cli-v0.4.11) (2026-11-02)
+
+
+### Bug Fixes
+
+* **ci:** rebase Dependabot PRs that fall behind main ([#95](https://github.com/alrayyes/scaffold-python-cli/issues/95)) ([69a743f](https://github.com/alrayyes/scaffold-python-cli/commit/69a743ff2e025ea0f1a1132f7620dec83e7fce0d)), closes [#94](https://github.com/alrayyes/scaffold-python-cli/issues/94)
+
 ## [0.4.10](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.9...scaffold-python-cli-v0.4.10) (2026-11-02)
 
 
