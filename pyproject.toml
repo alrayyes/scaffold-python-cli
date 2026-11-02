@@ -16,7 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.15",
 ]
 dependencies = [
-  "platformdirs==4.13.5",
+  "platformdirs==4.14.0",
   "tomli-w==1.2.0",
   "typer==0.27.3",
 ]
@@ -27,9 +27,9 @@ dev = [
   "click-man==0.6.0",
   "pyinstaller==6.22.3",
   "pyproject-fmt==2.30.3",
-  "pytest==9.1.1",
+  "pytest==9.2.0",
   "pytest-cov==7.1",
-  "ruff==0.17.2",
+  "ruff==0.17.3",
 ]
 
 [tool.ruff]
