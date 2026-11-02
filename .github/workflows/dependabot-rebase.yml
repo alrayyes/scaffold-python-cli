@@ -1,0 +1,38 @@
+# main requires branches to be up to date, so the moment one Dependabot pull
+# request merges, every other open one is behind and its armed auto-merge
+# stalls until Dependabot decides to rebase it (issue #94). Ask for the
+# rebase right away instead. Dependabot's own comment command is used rather
+# than `gh pr update-branch`: a merge commit pushed with GITHUB_TOKEN starts
+# no workflows, so the required checks would never run on the new head.
+# The rebase push re-fires dependabot-auto-merge, which re-arms auto-merge.
+name: dependabot-rebase
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  rebase:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Ask Dependabot to rebase pull requests that fell behind
+        run: |
+          # GitHub computes mergeStateStatus lazily after a push, so UNKNOWN
+          # is normal at first. Poll until none is left, up to about a minute.
+          for _ in 1 2 3 4 5 6; do
+            states=$(gh pr list --repo "$GITHUB_REPOSITORY" --author "app/dependabot" \
+              --json number,mergeStateStatus)
+            echo "$states" | jq -e 'any(.[]; .mergeStateStatus == "UNKNOWN")' >/dev/null || break
+            sleep 10
+          done
+          echo "$states" | jq -r '.[] | select(.mergeStateStatus == "BEHIND") | .number' |
+            while read -r pr; do
+              gh pr comment "$pr" --repo "$GITHUB_REPOSITORY" --body "@dependabot rebase"
+            done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
