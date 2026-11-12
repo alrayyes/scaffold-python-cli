@@ -29,7 +29,9 @@ This file is for whoever changes this template. The
   isn't obvious from the failure.
 
   `ltex-cli-plus` needs nothing installed: the hook fetches and caches it
-  on first use.
+  on first use. The pre-push hook checks only the Markdown in your push, and
+  all of it when `.ltex.json` or `scripts/lint-mechanics.sh` changed. CI, and
+  `bun run lint:mechanics` by hand, check every document.
 
 - **[gitleaks](https://github.com/gitleaks/gitleaks)** on your `PATH`, for
   the secret scan the commit and push hooks run. Your package manager's build
@@ -61,7 +63,8 @@ uv run ruff format         # the formatter; add --check for the check-only form
 bun run format:check       # prettier --check, add --write to fix
 bun run lint:md
 bun run lint:prose         # vale
-bun run lint:mechanics     # ltex-cli-plus
+bun run lint:mechanics     # ltex-cli-plus, every document
+./scripts/test-lint-mechanics.sh  # the mechanics script's cases, fake ltex
 ```
 
 ## How it fits together
