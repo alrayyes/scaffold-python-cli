@@ -18,7 +18,7 @@ classifiers = [
 dependencies = [
   "platformdirs==4.14.5",
   "tomli-w==1.2.0",
-  "typer==0.27.3",
+  "typer==0.29.1",
 ]
 scripts.scaffold-python-cli = "scaffold_python_cli:main"
 
@@ -29,7 +29,7 @@ dev = [
   "pyproject-fmt==2.30.6",
   "pytest==9.2.0",
   "pytest-cov==7.1",
-  "ruff==0.17.4",
+  "ruff==0.17.5",
 ]
 
 [tool.ruff]
