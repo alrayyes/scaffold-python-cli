@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.14](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.13...scaffold-python-cli-v0.4.14) (2026-11-17)
+
+
+### Documentation
+
+* note the Actions event policy a public repo needs ([#109](https://github.com/alrayyes/scaffold-python-cli/issues/109)) ([791ff56](https://github.com/alrayyes/scaffold-python-cli/commit/791ff564ac3de48d426fa55aed6a88b1c1408b24))
+
 ## [0.4.13](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.12...scaffold-python-cli-v0.4.13) (2026-11-16)
 
 
