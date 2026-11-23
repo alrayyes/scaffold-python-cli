@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.15](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.14...scaffold-python-cli-v0.4.15) (2026-11-23)
+
+
+### Bug Fixes
+
+* **deps:** bump the python-dependencies group with 4 updates ([#112](https://github.com/alrayyes/scaffold-python-cli/issues/112)) ([a25ad26](https://github.com/alrayyes/scaffold-python-cli/commit/a25ad2611b8afc7643820b10f4a6be16f165fcef))
+
 ## [0.4.14](https://github.com/alrayyes/scaffold-python-cli/compare/scaffold-python-cli-v0.4.13...scaffold-python-cli-v0.4.14) (2026-11-17)
 
 
